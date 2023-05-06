@@ -1,0 +1,1 @@
+https://raw.githubusercontent.com/chatgpt-prompts/Auto-GPT-chat-gpt-prompts/main/autoGPT.py
