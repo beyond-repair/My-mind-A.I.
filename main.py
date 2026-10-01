@@ -1,11 +1,17 @@
-import time
+import random
 
 from delegate_init import agents
 from delegate_class import Delegate
+from gpt_agent import capped_sleep
 from task_class import Task
 
 
+# Fixed seed so the coin-flip sketch is repeatable. Not a model.
+SIMULATION_SEED = 0
+
+
 def main():
+    random.seed(SIMULATION_SEED)
 
     # Initialize tasks
     tasks = [
@@ -38,10 +44,15 @@ def main():
             except Exception as e:
                 print(f'Error: {e}')
 
-    # Task complete
-    print('All tasks completed')
-    time.sleep(2)
+    done = sum(1 for task in tasks if task.completed)
+    print(
+        f'Simulation finished: {done}/{len(tasks)} tasks marked complete '
+        f'by a coin-flip, not a language model.'
+    )
+    # Original sketch paused 2 seconds here. Same cap as agent sleeps.
+    capped_sleep(2)
     print('Shutting down')
+    return tasks
 
 
 if __name__ == '__main__':
